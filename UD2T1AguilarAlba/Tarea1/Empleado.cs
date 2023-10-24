@@ -22,11 +22,17 @@ namespace UD2T1AguilarAlba.Tarea1 {
             get {
                 return nombre;
             }
+            set {
+                nombre = value;
+            }
         }
 
         public string Apellido1 {
             get {
                 return apellido1;
+            }
+            set {
+                apellido1 = value;
             }
         }
 
@@ -34,11 +40,17 @@ namespace UD2T1AguilarAlba.Tarea1 {
             get {
                 return apellido2;
             }
+            set {
+                apellido2 = value;
+            }
         }
 
         public int Edad {
             get {
                 return edad;
+            }
+            set {
+                edad = value;
             }
         }
 
@@ -46,15 +58,21 @@ namespace UD2T1AguilarAlba.Tarea1 {
             get {
                 return nif;
             }
+            set {
+                nif = value;
+            }
         }
 
         public double Salario {
             get {
                 return salario;
             }
+            set {
+                salario = value; 
+            }
         }
         public String MostrarEmpleado() {
-            return string.Format( "Nombre: {0} {1} {2}\nEdad: {3}\nNIF: {4}\nSalario: {5}€",nombre,apellido1,apellido2,edad,nif,salario );
+            return string.Format( "Nombre: {0} {1} {2}\nEdad: {3}\nNIF: {4}\nSalario: {5}€\n",nombre,apellido1,apellido2,edad,nif,salario );
         }
 
         public String StringEmpleado() {

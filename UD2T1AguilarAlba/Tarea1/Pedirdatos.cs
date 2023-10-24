@@ -26,7 +26,7 @@ namespace UD2T1AguilarAlba.Tarea1 {
             String frase;
             do {
                 Console.Write( "\n->" );
-                frase = Console.ReadLine();
+                frase = Console.ReadLine().Trim();
                 if ( frase.Length > 0 ) {
                     salida = true;
                 } else {
@@ -34,6 +34,11 @@ namespace UD2T1AguilarAlba.Tarea1 {
                 }
             } while ( !salida );
             return frase;
+        }
+
+        public String PedirString(string muestra) {
+            Console.Write( muestra );
+            return PedirString();
         }
 
         public int PedirIntEnRango(int num, int num2) {
@@ -77,6 +82,12 @@ namespace UD2T1AguilarAlba.Tarea1 {
 
             return numero;
         }
+
+        public int PedirInt(String frase) {
+            Console.Write( frase );
+            return PedirInt();
+        }
+
         public double PedirDouble() {
             bool salida = false;
             double numero = 0.0;
@@ -94,6 +105,7 @@ namespace UD2T1AguilarAlba.Tarea1 {
 
             return numero;
         }
+
         public double PedirDoublePositivo() {
             bool salida = false;
             double numero = 0.0;
@@ -108,6 +120,12 @@ namespace UD2T1AguilarAlba.Tarea1 {
 
             return numero;
         }
+
+        public double PedirDoublePositivo(string frase) {
+            Console.Write( frase );
+            return PedirDoublePositivo();
+        }
+
         public int PedirIntPositivo() {
             bool salida = false;
             int numero = 0;
@@ -121,6 +139,11 @@ namespace UD2T1AguilarAlba.Tarea1 {
             } while ( !salida );
 
             return numero;
+        }
+
+        public int PedirIntPositivo(string frase) {
+            Console.Write( frase );
+            return PedirIntPositivo();
         }
     }
 }
