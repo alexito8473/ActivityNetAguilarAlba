@@ -7,7 +7,7 @@ namespace UD2T1AguilarAlba.Tarea1 {
     public class Empresa {
         private List<Empleado> ListaEmpleados = new List<Empleado>();
         private Pedirdatos ped = new Pedirdatos();
-        private string Direccion = "../Tarea1/ArchivoEmpresaEmpleados.txt";
+        private string Direccion = "ArchivoEmpresaEmpleado.cs";
 
         public Empresa() {
             LeerEmpeladosFichero();
@@ -16,7 +16,7 @@ namespace UD2T1AguilarAlba.Tarea1 {
             StreamWriter escritor = new StreamWriter( Direccion );
             if ( ListaEmpleados.Count>0) {
                 foreach (Empleado persona in ListaEmpleados ) {
-                        escritor.WriteLine( persona.StringEmpleado() );
+                        escritor.WriteLine("//"+persona.StringEmpleado() );
                    }
             } else {
                 escritor.Write( "" );
@@ -27,8 +27,10 @@ namespace UD2T1AguilarAlba.Tarea1 {
             StreamReader lector= null;
             string contenido;
             try {
+                Console.Write("asd");
                 lector = new StreamReader( Direccion );
                 contenido = lector.ReadLine();
+                Console.Write( "asd" );
                 while ( contenido != null ) {
 
                     ListaEmpleados.Add( DeStringAEmpleado (contenido ));
@@ -46,7 +48,7 @@ namespace UD2T1AguilarAlba.Tarea1 {
         }
         private Empleado DeStringAEmpleado(string empladoString) {
             string[] listaAtributos= empladoString.Split('/');
-            return new Empleado( listaAtributos [1], listaAtributos [2], listaAtributos [3],Int16.Parse( listaAtributos[4]), listaAtributos[0],Double.Parse( listaAtributos[5] ));
+            return new Empleado( listaAtributos [3], listaAtributos [4], listaAtributos [5],Int16.Parse( listaAtributos[6]), listaAtributos[2],Double.Parse( listaAtributos[7] ));
         }
         public void CrearEmpleado() {
             bool salida = false;

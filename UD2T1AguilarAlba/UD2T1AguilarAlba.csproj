@@ -37,10 +37,11 @@
     <Compile Include="Tarea1\Empleado.cs" />
     <Compile Include="Tarea1\Empresa.cs" />
     <Compile Include="Tarea1\Pedirdatos.cs" />
-    <Compile Include="bin\Debug\ArchivoEmpresaEmpleados.txt" />
+    <Compile Include="bin\Release\ArchivoEmpresaEmpleado.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tarea1\" />
+    <Folder Include="bin\Debug\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
