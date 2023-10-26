@@ -35,7 +35,14 @@ namespace UD2T1AguilarAlba.Tarea1 {
             } while ( !salida );
             return frase;
         }
-
+        public String PedirStringSinControl() {
+            Console.Write( "\n->" );
+            return Console.ReadLine().Trim();
+        }
+        public String PedirStringSinControl(string frase) {
+            Console.Write( frase );
+            return PedirStringSinControl();
+        }
         public String PedirString(string muestra) {
             Console.Write( muestra );
             return PedirString();
@@ -54,8 +61,7 @@ namespace UD2T1AguilarAlba.Tarea1 {
             }
             int datoSalida;
             Console.Write("El número introducido debe de ser entre {0} y {1}", numero1, numero2);
-            do {
-               
+            do {   
                 datoSalida = PedirInt();
                 if (datoSalida<= numero2 && datoSalida>= numero1 ) {
                     salida = true;

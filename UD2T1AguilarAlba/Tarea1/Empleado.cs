@@ -18,6 +18,7 @@ namespace UD2T1AguilarAlba.Tarea1 {
             this.nif = nif;
             this.salario = salario;
         }
+
         public string Nombre {
             get {
                 return nombre;
