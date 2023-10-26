@@ -7,7 +7,7 @@ namespace UD2T1AguilarAlba.Tarea1 {
     public class Empresa {
         private List<Empleado> ListaEmpleados = new List<Empleado>();
         private Pedirdatos ped = new Pedirdatos();
-        private string Direccion = "ArchivoEmpresaEmpleados.txt";
+        private string Direccion = "../Tarea1/ArchivoEmpresaEmpleados.txt";
 
         public Empresa() {
             LeerEmpeladosFichero();
