@@ -81,8 +81,6 @@ namespace UD2T1AguilarAlba.Tarea1 {
                     salida = true;
                 } catch {
                     Console.Write( "El numero que sea valido" );
-                } finally {
-                    Console.Write( "\n" );
                 }
             } while ( !salida );
 
@@ -104,8 +102,6 @@ namespace UD2T1AguilarAlba.Tarea1 {
                     salida = true;
                 } catch {
                     Console.Write( "El numero que sea valido" );
-                } finally {
-                    Console.Write( "\n" );
                 }
             } while ( !salida );
 
@@ -120,7 +116,7 @@ namespace UD2T1AguilarAlba.Tarea1 {
                 if ( numero > 0.0 ) {
                     salida = true;
                 } else {
-                    Console.Write( "Debe ser que 0" );
+                    Console.Write( "Debe ser mayor a 0" );
                 }
             } while ( !salida );
 
@@ -137,7 +133,7 @@ namespace UD2T1AguilarAlba.Tarea1 {
             int numero = 0;
             do {
                 numero = PedirInt();
-                if (numero > 18) {
+                if (numero >= 18) {
                     salida = true;
                 } else{
                     Console.Write( "Debe ser mayor de edad" );

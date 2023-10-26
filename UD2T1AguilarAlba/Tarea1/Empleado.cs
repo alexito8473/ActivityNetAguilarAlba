@@ -3,7 +3,6 @@ namespace UD2T1AguilarAlba.Tarea1 {
     public class Empleado {
 
         private string nombre;
-
         private string apellido1;
         private string apellido2;
         private int edad;
@@ -73,7 +72,7 @@ namespace UD2T1AguilarAlba.Tarea1 {
             }
         }
         public String MostrarEmpleado() {
-            return string.Format( "Nombre: {0} {1} {2}\nEdad: {3}\nNIF: {4}\nSalario: {5}€\n",nombre,apellido1,apellido2,edad,nif,salario );
+            return string.Format( "Nombre: {0} {1} {2}\nEdad: {3}\nNIF: {4}\nSalario: {5}€\n\n",nombre,apellido1,apellido2,edad,nif,salario );
         }
 
         public String StringEmpleado() {

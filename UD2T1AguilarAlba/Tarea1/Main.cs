@@ -18,20 +18,42 @@ namespace UD2T1AguilarAlba.Tarea1 {
         private const int MOSTRAR_NOMBRE = 3;
         private const int ACTUALIZAR_NOMBRE = 4;
         private const int MOSTRAR_EDAD = 5;
-        private const int MODIFCAR_EDAD = 6;
+        private const int MODIFICAR_EDAD = 6;
         private const int ELIMINAR_EMPLEADO = 7;
         private const int MOSTRAR_EMPLEADO = 8;
 
+        private string TEXTO_SALIDA = string.Format($"\t\t{SALIDA} -> Salir\n" );
+        private string TEXTO_CREAR_EMPLEADO = string.Format( $"\t\t{CREAR_EMPLEADO} -> Crear empleado\n" );
+        private string TEXTO_ACTUALIZAR_SALARIO = string.Format( $"\t\t{ACTUALIZAR_SALARIO} -> Actualizar salario\n" );
+        private string TEXTO_MOSTRAR_NOMBRE = string.Format( $"\t\t{MOSTRAR_NOMBRE} -> Mostrar nombre\n" );
+        private string TEXTO_ACTUALIZAR_NOMBRE = string.Format( $"\t\t{ACTUALIZAR_NOMBRE} -> Actualizar nombre\n" );
+        private string TEXTO_MOSTRAR_EDAD = string.Format( $"\t\t{MOSTRAR_EDAD} -> Mostrar edad\n" );
+        private string TEXTO_MODIFCAR_EDAD = string.Format( $"\t\t{MODIFICAR_EDAD} -> Modificar edad\n" );
+        private string TEXTO_ELIMINAR_EMPLEADO = string.Format( $"\t\t{ELIMINAR_EMPLEADO} -> Eliminar empleado\n" );
+        private string TEXTO_MOSTRAR_EMPLEADO = string.Format( $"\t\t{MOSTRAR_EMPLEADO} -> Mostrar empleado [NIF] / todos los empleados\n" );
         private Pedirdatos ped = new Pedirdatos();
 
         private void Tarea1() {
             Empresa empre = new Empresa();
             Menu( empre );
         }
+
+        private void MostrarMenu() {
+            Console.ResetColor();
+            Console.Write( "\n\t\t  ---Super Menu---\n" );
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write( "{0}{1}{2}", TEXTO_SALIDA, TEXTO_CREAR_EMPLEADO, TEXTO_ACTUALIZAR_SALARIO );
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write( "{0}{1}{2}", TEXTO_MOSTRAR_NOMBRE, TEXTO_ACTUALIZAR_NOMBRE, TEXTO_MOSTRAR_EDAD );
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write( "{0}{1}{2}\n", TEXTO_MODIFCAR_EDAD, TEXTO_ELIMINAR_EMPLEADO , TEXTO_MOSTRAR_EMPLEADO );
+            Console.ResetColor();
+        }
+
         private void Menu(  Empresa empre ) {
             bool salida = false;
             do {
-                Console.Write( "\n---Menu---\n0 -> Salir\n1 -> Crear empleado\n2 -> Actualizar salario\n3 -> Mostrar nombre\n4 -> Actualizar nombre\n5 -> Mostrar edad\n6 -> Modificar edad\n7 -> Eliminar empleado\n8 -> Mostrar empleado/Mostrar todos\n" );
+                MostrarMenu();
                 switch ( ped.PedirIntEnRango( 0, MAXIMO ) ) {
                     case SALIDA:
                         salida = true;
@@ -51,7 +73,7 @@ namespace UD2T1AguilarAlba.Tarea1 {
                     case MOSTRAR_EDAD:
                         empre.AccederEdad(  true );
                         break;
-                    case MODIFCAR_EDAD:
+                    case MODIFICAR_EDAD:
                         empre.AccederEdad(  false );
                         break;
                     case ELIMINAR_EMPLEADO:
@@ -62,6 +84,7 @@ namespace UD2T1AguilarAlba.Tarea1 {
                         break;
                 }
             } while ( !salida );
+            empre.EscribrirEmpleadosFichero();
             Console.Write( "Se cerro el programa" );
         }
 
