@@ -27,10 +27,8 @@ namespace UD2T1AguilarAlba.Tarea1 {
             StreamReader lector= null;
             string contenido;
             try {
-                Console.Write("asd");
                 lector = new StreamReader( Direccion );
                 contenido = lector.ReadLine();
-                Console.Write( "asd" );
                 while ( contenido != null ) {
 
                     ListaEmpleados.Add( DeStringAEmpleado (contenido ));
