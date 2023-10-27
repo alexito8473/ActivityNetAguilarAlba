@@ -23,6 +23,10 @@ namespace UD2T1AguilarAlba.Tarea1 {
             }
             escritor.Close();
         }
+
+        public List<Empleado> GetListEmpleados(){
+            return ListaEmpleados;
+        }
         private void LeerEmpeladosFichero() {
             StreamReader lector= null;
             string contenido;
@@ -76,40 +80,18 @@ namespace UD2T1AguilarAlba.Tarea1 {
             } else {
                 foreach ( Empleado empleado in listaEmpleados ) {
                     Console.Write( empleado.MostrarEmpleado() );
-
                 }
             }
         }
 
-        public void AccederEdad( bool tipo ) { // true: ver Edad, false: modificar edad
-            string nif;
-            bool salida = false;
-            if ( ListaEmpleados.Count == 0 ) {
-                Console.Write( "No hay empleados" );
-            } else {
-                MostrarListaNif();
-                do {
-                    if ( ( nif = ped.PedirStringSinControl( "\nPasame el nif que quieras buscar" ) ).Length > 0 ) {
-                        if ( ExisteNif( nif ) ) {
-                            if ( tipo ) {
-                                Console.Write( "Su edad es -> " );
-                                Console.Write( ListaEmpleados.Find( ( obj ) => obj.Nif.Equals( nif ) ).Edad );
-                            } else {
-                                ListaEmpleados.Find( ( obj ) => obj.Nif.Equals( nif ) ).Edad = ped.PedirIntPositivo( "Nueva edad que quieras introducir" );
-                                Console.Write( "Cambio de edad realizado" );
-                            }
-                            salida = true;
-                        } else {
-                            Console.Write( "No existe el usuario" );
-                        }
-                    } else {
-                        salida = true;
-                        Console.Write( "Saliendo...\n" );
-                    }
-                } while (!salida);
-            }
+        public void ModificarEdad(Empleado emple) {
+            emple.Edad = ped.PedirIntPositivo( "Nueva edad que quieras introducir" );
         }
-        public void AccederNombre(  bool tipo ) { // true: ver nombre, false: modificar nombre
+       
+        public void MostrarEdad(Empleado emple) {
+            Console.Write("Su edad es {0}\n", emple.Edad );
+        }
+        public void MostrarNombre( ) { // true: ver nombre, false: modificar nombre
             string nif;
             bool salida=false;
             if ( ListaEmpleados.Count == 0 ) {
@@ -119,13 +101,8 @@ namespace UD2T1AguilarAlba.Tarea1 {
                 do {
                     if ( ( nif = ped.PedirStringSinControl( "\nPasame el nif que quieras buscar" ) ).Length > 0 ) {
                         if ( ExisteNif( nif ) ) {
-                            if ( tipo ) {
-                                Console.Write( "Su nombres es -> " );
-                                Console.Write( DevolverEmpleado( nif ).Nombre );
-                            } else {
-                                DevolverEmpleado( nif ).Nombre = ped.PedirString( "Que nombre quieres introducir al nuevo usuario" );
-                                Console.Write( "Cambio de nombre realizado" );
-                            }
+                            Console.Write( "Su nombres es -> " );
+                            Console.Write( DevolverEmpleado( nif ).NombreCompleto() );
                             salida = true;
                         } else {
                             Console.Write( "No existe el usuario" );
@@ -137,17 +114,31 @@ namespace UD2T1AguilarAlba.Tarea1 {
                 } while (!salida );
             }
         }
-        public void ActualizarSalario(  ) {
+
+        public void ActualizarNombre() {
             string nif;
-            bool salida=false;
+            string nombreCompleto ;
+            bool salida = false;
+            bool salida2=false;
             if ( ListaEmpleados.Count == 0 ) {
                 Console.Write( "No hay empleados" );
             } else {
-                MostrarListaNif( );
+                MostrarListaNif();
                 do {
                     if ( ( nif = ped.PedirStringSinControl( "\nPasame el nif que quieras buscar" ) ).Length > 0 ) {
                         if ( ExisteNif( nif ) ) {
-                            DevolverEmpleado( nif ).Salario = ped.PedirDoublePositivo( "Que salario quieres introducir al nuevo usuario" );
+                            Console.Write( "Introduce el nombre(Los nombres compueto se deben poner con guiones) y los apellidos con espacios(No se cogeran más de 1 nombre y 2 apellido)\n" );
+                            do {
+                                nombreCompleto = ped.PedirString(  );
+                                if ( nombreCompleto.Split(' ').Count() == 3) {
+                                    salida2 = true;
+                                }else  {
+                                    Console.Write( "Se trata de 1 nombre y 2 apellidos, gracia\n" );
+                                }
+                            } while (!salida2 );
+                               DevolverEmpleado( nif ).Nombre = nombreCompleto.Split( ' ' )[0];
+                            DevolverEmpleado( nif ).Apellido1 = nombreCompleto.Split( ' ' )[1];
+                            DevolverEmpleado( nif ).Apellido2 = nombreCompleto.Split( ' ' )[2];
                             Console.Write( "Cambio de nombre realizado" );
                             salida = true;
                         } else {
@@ -160,10 +151,7 @@ namespace UD2T1AguilarAlba.Tarea1 {
                 } while ( !salida );
             }
         }
-        private Empleado DevolverEmpleado( string nif ) {
-            return ListaEmpleados.Find( ( obj ) => obj.Nif.Equals( nif ) );
-        }
-        public void EliminarEmpleado( ) {
+        public void ActualizarSalario( double salario ) {
             string nif;
             bool salida=false;
             if ( ListaEmpleados.Count == 0 ) {
@@ -173,18 +161,25 @@ namespace UD2T1AguilarAlba.Tarea1 {
                 do {
                     if ( ( nif = ped.PedirStringSinControl( "\nPasame el nif que quieras buscar" ) ).Length > 0 ) {
                         if ( ExisteNif( nif ) ) {
-                            ListaEmpleados.RemoveAll( ( obj ) => obj.Equals( nif ) );
-                            Console.Write( "Fue borrado con exito" );
+                            DevolverEmpleado( nif ).Salario = salario;
+                            Console.Write( "Cambio de nombre realizado" );
                             salida = true;
                         } else {
-                            Console.Write( "No existe el usuario\n" );
+                            Console.Write( "No existe el usuario" );
                         }
                     } else {
                         salida = true;
                         Console.Write( "Saliendo...\n" );
                     }
-                } while (!salida );
+                } while ( !salida );
             }
+        }
+
+        public Empleado DevolverEmpleado( string nif ) {
+            return ListaEmpleados.Find( ( obj ) => obj.Nif.Equals( nif ) );
+        }
+        public void EliminarEmpleado(Empleado emple ) {
+            ListaEmpleados.Remove( emple );
         }
 
         public void ComoMostrarEmpleado( ) {
@@ -210,7 +205,7 @@ namespace UD2T1AguilarAlba.Tarea1 {
             }while (!salida ) ;
             }
         }
-        private bool ExisteNif(  string nif ) {// true: si esta false: no esta
+        public bool ExisteNif(  string nif ) {// true: si esta false: no esta
             return ListaEmpleados.Find( ( arg ) => arg.Nif.Equals( nif ) ) != null;
         }
         private void MostrarUnEmpleado(  String nif ) {
@@ -221,7 +216,7 @@ namespace UD2T1AguilarAlba.Tarea1 {
                 Console.Write( empleado.MostrarEmpleado() );
             }
         }
-        private void MostrarListaNif() {
+        public void MostrarListaNif() {
             Console.Write( "Los nif dispibles son (" + string.Join( "-", ListaEmpleados.Select( t => t.Nif ) ) + ")\n" );
         }
 

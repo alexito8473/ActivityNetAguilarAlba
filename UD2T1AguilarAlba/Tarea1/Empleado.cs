@@ -71,11 +71,15 @@ namespace UD2T1AguilarAlba.Tarea1 {
                 salario = value; 
             }
         }
-        public String MostrarEmpleado() {
+
+        public string NombreCompleto() {
+            return string.Format( "{0} {1} {2}", nombre, apellido1, apellido2 );
+        }
+        public string MostrarEmpleado() {
             return string.Format( "Nombre: {0} {1} {2}\nEdad: {3}\nNIF: {4}\nSalario: {5}€\n\n",nombre,apellido1,apellido2,edad,nif,salario );
         }
 
-        public String StringEmpleado() {
+        public string StringEmpleado() {
             return string.Format( "{0}/{1}/{2}/{3}/{4}/{5}",nif, nombre, apellido1, apellido2, edad, salario );
         }
     }

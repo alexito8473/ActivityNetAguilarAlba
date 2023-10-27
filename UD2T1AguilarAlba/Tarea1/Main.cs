@@ -52,6 +52,8 @@ namespace UD2T1AguilarAlba.Tarea1 {
 
         private void Menu(  Empresa empre ) {
             bool salida = false;
+            bool salidaMini = false;
+            string nif;
             do {
                 MostrarMenu();
                 switch ( ped.PedirIntEnRango( 0, MAXIMO ) ) {
@@ -62,22 +64,83 @@ namespace UD2T1AguilarAlba.Tarea1 {
                         empre.CrearEmpleado();
                         break;
                     case ACTUALIZAR_SALARIO:
-                        empre.ActualizarSalario( );
+                        if ( empre.GetListEmpleados().Count>0 ) {
+                            empre.ActualizarSalario( ped.PedirDoublePositivo( "Que salario quieres introducir al nuevo usuario" ) );
+                        } else {
+                            Console.Write( "No hay empleados" );
+                        }
                         break;
                     case MOSTRAR_NOMBRE:
-                        empre.AccederNombre(  true );
+                        empre.MostrarNombre(  );
                         break;
                     case ACTUALIZAR_NOMBRE:
-                        empre.AccederNombre(  false );
+                        empre.ActualizarNombre( );
                         break;
                     case MOSTRAR_EDAD:
-                        empre.AccederEdad(  true );
+                        if ( empre.GetListEmpleados().Count == 0 ) {
+                            Console.Write( "No hay empleados" );
+                        } else {
+                            salidaMini = false;
+                            empre.MostrarListaNif();
+                            do {
+                                if ( ( nif = ped.PedirStringSinControl( "\nPasame el nif que quieras buscar" ) ).Length > 0 ) {
+                                    if ( empre.ExisteNif( nif ) ) {
+                                        Console.Write( "Su edad es -> " );
+                                        empre.MostrarEdad(empre.DevolverEmpleado(nif));
+                                        salidaMini = true;
+                                    } else {
+                                        Console.Write( "No existe el usuario" );
+                                    }
+                                } else {
+                                    salidaMini = true;
+                                    Console.Write( "Saliendo...\n" );
+                                }
+                            } while ( !salidaMini );
+                        }    
                         break;
                     case MODIFICAR_EDAD:
-                        empre.AccederEdad(  false );
+                        if ( empre.GetListEmpleados().Count == 0 ) {
+                            Console.Write( "No hay empleados" );
+                        } else {
+                            salidaMini = false;
+                            empre.MostrarListaNif();
+                            do {
+                                if ( ( nif = ped.PedirStringSinControl( "\nPasame el nif que quieras buscar" ) ).Length > 0 ) {
+                                    if ( empre.ExisteNif( nif ) ) {
+                                        empre.ModificarEdad( empre.DevolverEmpleado( nif ) );
+                                        Console.Write( "Edad modificada" );
+                                        salidaMini = true;
+                                    } else {
+                                        Console.Write( "No existe el usuario" );
+                                    }
+                                } else {
+                                    salidaMini = true;
+                                    Console.Write( "Saliendo...\n" );
+                                }
+                            } while ( !salidaMini );
+                        }
                         break;
                     case ELIMINAR_EMPLEADO:
-                        empre.EliminarEmpleado(  );
+                        if ( empre.GetListEmpleados().Count == 0 ) {
+                            Console.Write( "No hay empleados" );
+                        } else {
+                            salidaMini = false;
+                            empre.MostrarListaNif();
+                            do {
+                                if ( ( nif = ped.PedirStringSinControl( "\nPasame el nif que quieras buscar" ) ).Length > 0 ) {
+                                    if ( empre.ExisteNif( nif ) ) {
+                                        empre.EliminarEmpleado( empre.DevolverEmpleado( nif ) );
+                                        Console.Write( "Usuario eliminado" );
+                                        salidaMini = true;
+                                    } else {
+                                        Console.Write( "No existe el usuario" );
+                                    }
+                                } else {
+                                    salidaMini = true;
+                                    Console.Write( "Saliendo...\n" );
+                                }
+                            } while ( !salidaMini );
+                        }
                         break;
                     case MOSTRAR_EMPLEADO:
                         empre.ComoMostrarEmpleado(  );
